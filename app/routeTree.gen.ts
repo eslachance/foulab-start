@@ -11,14 +11,46 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as LocationImport } from './routes/location'
+import { Route as ContactImport } from './routes/contact'
+import { Route as CalendarImport } from './routes/calendar'
+import { Route as AboutImport } from './routes/about'
 import { Route as AuthedImport } from './routes/_authed'
 import { Route as IndexImport } from './routes/index'
+import { Route as ProjectsIndexImport } from './routes/projects/index'
+import { Route as NewsIndexImport } from './routes/news/index'
+import { Route as ExpositionIndexImport } from './routes/exposition/index'
+import { Route as NewsSlugImport } from './routes/news/$slug'
 import { Route as AuthedPostsImport } from './routes/_authed/posts'
 import { Route as AuthedPostsIndexImport } from './routes/_authed/posts.index'
 import { Route as AuthedProfileSplatImport } from './routes/_authed/profile.$'
 import { Route as AuthedPostsPostIdImport } from './routes/_authed/posts.$postId'
 
 // Create/Update Routes
+
+const LocationRoute = LocationImport.update({
+  id: '/location',
+  path: '/location',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ContactRoute = ContactImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CalendarRoute = CalendarImport.update({
+  id: '/calendar',
+  path: '/calendar',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AboutRoute = AboutImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AuthedRoute = AuthedImport.update({
   id: '/_authed',
@@ -28,6 +60,30 @@ const AuthedRoute = AuthedImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProjectsIndexRoute = ProjectsIndexImport.update({
+  id: '/projects/',
+  path: '/projects/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const NewsIndexRoute = NewsIndexImport.update({
+  id: '/news/',
+  path: '/news/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ExpositionIndexRoute = ExpositionIndexImport.update({
+  id: '/exposition/',
+  path: '/exposition/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const NewsSlugRoute = NewsSlugImport.update({
+  id: '/news/$slug',
+  path: '/news/$slug',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -73,12 +129,68 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedImport
       parentRoute: typeof rootRoute
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutImport
+      parentRoute: typeof rootRoute
+    }
+    '/calendar': {
+      id: '/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof CalendarImport
+      parentRoute: typeof rootRoute
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactImport
+      parentRoute: typeof rootRoute
+    }
+    '/location': {
+      id: '/location'
+      path: '/location'
+      fullPath: '/location'
+      preLoaderRoute: typeof LocationImport
+      parentRoute: typeof rootRoute
+    }
     '/_authed/posts': {
       id: '/_authed/posts'
       path: '/posts'
       fullPath: '/posts'
       preLoaderRoute: typeof AuthedPostsImport
       parentRoute: typeof AuthedImport
+    }
+    '/news/$slug': {
+      id: '/news/$slug'
+      path: '/news/$slug'
+      fullPath: '/news/$slug'
+      preLoaderRoute: typeof NewsSlugImport
+      parentRoute: typeof rootRoute
+    }
+    '/exposition/': {
+      id: '/exposition/'
+      path: '/exposition'
+      fullPath: '/exposition'
+      preLoaderRoute: typeof ExpositionIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/news/': {
+      id: '/news/'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/projects/': {
+      id: '/projects/'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsIndexImport
+      parentRoute: typeof rootRoute
     }
     '/_authed/posts/$postId': {
       id: '/_authed/posts/$postId'
@@ -136,7 +248,15 @@ const AuthedRouteWithChildren =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof AuthedRouteWithChildren
+  '/about': typeof AboutRoute
+  '/calendar': typeof CalendarRoute
+  '/contact': typeof ContactRoute
+  '/location': typeof LocationRoute
   '/posts': typeof AuthedPostsRouteWithChildren
+  '/news/$slug': typeof NewsSlugRoute
+  '/exposition': typeof ExpositionIndexRoute
+  '/news': typeof NewsIndexRoute
+  '/projects': typeof ProjectsIndexRoute
   '/posts/$postId': typeof AuthedPostsPostIdRoute
   '/profile/$': typeof AuthedProfileSplatRoute
   '/posts/': typeof AuthedPostsIndexRoute
@@ -145,6 +265,14 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof AuthedRouteWithChildren
+  '/about': typeof AboutRoute
+  '/calendar': typeof CalendarRoute
+  '/contact': typeof ContactRoute
+  '/location': typeof LocationRoute
+  '/news/$slug': typeof NewsSlugRoute
+  '/exposition': typeof ExpositionIndexRoute
+  '/news': typeof NewsIndexRoute
+  '/projects': typeof ProjectsIndexRoute
   '/posts/$postId': typeof AuthedPostsPostIdRoute
   '/profile/$': typeof AuthedProfileSplatRoute
   '/posts': typeof AuthedPostsIndexRoute
@@ -154,7 +282,15 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/_authed': typeof AuthedRouteWithChildren
+  '/about': typeof AboutRoute
+  '/calendar': typeof CalendarRoute
+  '/contact': typeof ContactRoute
+  '/location': typeof LocationRoute
   '/_authed/posts': typeof AuthedPostsRouteWithChildren
+  '/news/$slug': typeof NewsSlugRoute
+  '/exposition/': typeof ExpositionIndexRoute
+  '/news/': typeof NewsIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
   '/_authed/posts/$postId': typeof AuthedPostsPostIdRoute
   '/_authed/profile/$': typeof AuthedProfileSplatRoute
   '/_authed/posts/': typeof AuthedPostsIndexRoute
@@ -162,14 +298,49 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '' | '/posts' | '/posts/$postId' | '/profile/$' | '/posts/'
+  fullPaths:
+    | '/'
+    | ''
+    | '/about'
+    | '/calendar'
+    | '/contact'
+    | '/location'
+    | '/posts'
+    | '/news/$slug'
+    | '/exposition'
+    | '/news'
+    | '/projects'
+    | '/posts/$postId'
+    | '/profile/$'
+    | '/posts/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/posts/$postId' | '/profile/$' | '/posts'
+  to:
+    | '/'
+    | ''
+    | '/about'
+    | '/calendar'
+    | '/contact'
+    | '/location'
+    | '/news/$slug'
+    | '/exposition'
+    | '/news'
+    | '/projects'
+    | '/posts/$postId'
+    | '/profile/$'
+    | '/posts'
   id:
     | '__root__'
     | '/'
     | '/_authed'
+    | '/about'
+    | '/calendar'
+    | '/contact'
+    | '/location'
     | '/_authed/posts'
+    | '/news/$slug'
+    | '/exposition/'
+    | '/news/'
+    | '/projects/'
     | '/_authed/posts/$postId'
     | '/_authed/profile/$'
     | '/_authed/posts/'
@@ -179,11 +350,27 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthedRoute: typeof AuthedRouteWithChildren
+  AboutRoute: typeof AboutRoute
+  CalendarRoute: typeof CalendarRoute
+  ContactRoute: typeof ContactRoute
+  LocationRoute: typeof LocationRoute
+  NewsSlugRoute: typeof NewsSlugRoute
+  ExpositionIndexRoute: typeof ExpositionIndexRoute
+  NewsIndexRoute: typeof NewsIndexRoute
+  ProjectsIndexRoute: typeof ProjectsIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthedRoute: AuthedRouteWithChildren,
+  AboutRoute: AboutRoute,
+  CalendarRoute: CalendarRoute,
+  ContactRoute: ContactRoute,
+  LocationRoute: LocationRoute,
+  NewsSlugRoute: NewsSlugRoute,
+  ExpositionIndexRoute: ExpositionIndexRoute,
+  NewsIndexRoute: NewsIndexRoute,
+  ProjectsIndexRoute: ProjectsIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -197,7 +384,15 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/_authed"
+        "/_authed",
+        "/about",
+        "/calendar",
+        "/contact",
+        "/location",
+        "/news/$slug",
+        "/exposition/",
+        "/news/",
+        "/projects/"
       ]
     },
     "/": {
@@ -210,6 +405,18 @@ export const routeTree = rootRoute
         "/_authed/profile/$"
       ]
     },
+    "/about": {
+      "filePath": "about.tsx"
+    },
+    "/calendar": {
+      "filePath": "calendar.tsx"
+    },
+    "/contact": {
+      "filePath": "contact.tsx"
+    },
+    "/location": {
+      "filePath": "location.tsx"
+    },
     "/_authed/posts": {
       "filePath": "_authed/posts.tsx",
       "parent": "/_authed",
@@ -217,6 +424,18 @@ export const routeTree = rootRoute
         "/_authed/posts/$postId",
         "/_authed/posts/"
       ]
+    },
+    "/news/$slug": {
+      "filePath": "news/$slug.tsx"
+    },
+    "/exposition/": {
+      "filePath": "exposition/index.tsx"
+    },
+    "/news/": {
+      "filePath": "news/index.tsx"
+    },
+    "/projects/": {
+      "filePath": "projects/index.tsx"
     },
     "/_authed/posts/$postId": {
       "filePath": "_authed/posts.$postId.tsx",

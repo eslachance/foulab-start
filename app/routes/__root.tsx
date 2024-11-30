@@ -13,7 +13,7 @@ import * as React from 'react'
 import { getAuth } from '@clerk/tanstack-start/server'
 import { getWebRequest } from 'vinxi/http'
 import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary.js'
-import { Header, Navbar } from '~/components/layout'
+import { Header, Navbar, Footer } from '~/components/layout'
 import { NotFound } from '~/components/NotFound.js'
 import appCss from '~/styles/app.css?url'
 
@@ -106,10 +106,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
               {children}
             </div>
             <Navbar />
-            </div>
-          <div id="footer" className="h-[50px] bg-gray-600 border-x-solid border-x-[#22180b] border-x-[1px] text-[7pt] pt-4">
-
           </div>
+          <Footer />
         </div>
         <ScrollRestoration />
         <TanStackRouterDevtools position="bottom-right" />
